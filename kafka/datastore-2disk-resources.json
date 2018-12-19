@@ -43,7 +43,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('nicName'), '-', copyindex())]",
+      "name": "[concat(variables('nicName'), copyindex())]",
       "location": "[parameters('location')]",
       "copy": {
         "name": "nicCopyLoop",
@@ -55,7 +55,7 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[concat(variables('addprefix'), '-', copyindex())]",
+              "privateIPAddress": "[concat(variables('addprefix'), copyindex())]",
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
@@ -67,10 +67,10 @@
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(variables('vmName'), '-', copyindex())]",
+      "name": "[concat(variables('vmName'), copyindex())]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '-', copyindex())]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), copyindex())]"
       ],
       "copy": {
         "name": "vmCopyLoop",
@@ -84,27 +84,27 @@
           "vmSize": "[parameters('machineSettingsbroker').vmSize]"
         },
         "osProfile": {
-          "computerName": "[concat(variables('vmName'), '-', copyindex())]",
+          "computerName": "[concat(variables('vmName'), copyindex())]",
           "adminUsername": "[variables('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": "[parameters('osSettings').imageReference]",
           "osDisk": {
-            "name": "[concat(variables('vmName'), '-', copyindex(),'_OSDisk')]",
+            "name": "[concat(variables('vmName'), copyindex(),'_OSDisk')]",
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
-              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk1')]", 
+              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk1')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 0,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk2')]", 
+              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk2')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 1,
               "caching": "None",
@@ -115,7 +115,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), '-', copyindex()) )]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), copyindex()) )]"
             }
           ]
         }
@@ -123,11 +123,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(variables('vmName'), '-', copyindex(), '/install_kafka')]",
+      "name": "[concat(variables('vmName'), copyindex(), '/install_kafka')]",
       "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), '-', copyindex())]"
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyindex())]"
       ],
       "copy": {
         "name": "scriptCopyLoop",
