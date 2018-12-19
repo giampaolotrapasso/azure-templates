@@ -32,8 +32,8 @@
     "namespace": "[parameters('commonSettings').namespace]",
     "subnetRef": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('subnet').vnet), '/subnets/', parameters('subnet').name)]",
 
-    "vmName": "[concat(variables('namespace'), 'vm')]",
-    "nicName": "[concat(variables('namespace'), 'nic')]",
+    "vmName": "[concat(variables('namespace'), '-', 'vm')]",
+    "nicName": "[concat(variables('namespace'), '-', 'nic')]",
     "adminUsername": "[parameters('commonSettings').adminUsername]",
     "vmCount": "[parameters('machineSettingsbroker').vmCount]",
     "zCount": "[parameters('machineSettingsbroker').zookeeperCount]",
