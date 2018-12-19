@@ -53,7 +53,7 @@
     },
     "virtualNetworkName": {
       "type": "string",
-      "defaultValue": "testnet",
+      "defaultValue": "vnet",
       "metadata": {
         "description": "Virtual network name"
       }
