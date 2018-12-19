@@ -41,7 +41,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('nicName'), copyindex())]",
+      "name": "[concat(variables('nicName'), '-', copyindex())]",
       "location": "[parameters('location')]",
       "copy": {
         "name": "nicCopyLoop",
@@ -53,7 +53,7 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[concat(variables('addprefix'), copyindex())]",
+              "privateIPAddress": "[concat(variables('addprefix'), '-', copyindex())]",
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
@@ -68,7 +68,7 @@
       "name": "[concat(variables('vmName'), copyindex())]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), copyindex())]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '-', copyindex())]"
       ],
       "copy": {
         "name": "vmCopyLoop",
@@ -82,14 +82,14 @@
           "vmSize": "[parameters('machineSettings').vmSize]"
         },
         "osProfile": {
-          "computerName": "[concat(variables('vmName'), copyindex())]",
+          "computerName": "[concat(variables('vmName'), '-', copyindex())]",
           "adminUsername": "[variables('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": "[parameters('osSettings').imageReference]",
           "osDisk": {
-            "name": "[concat(variables('vmName'), copyindex(),'OSDisk')]",
+            "name": "[concat(variables('vmName'), '-', copyindex(),'OSDisk')]",
             "caching": "ReadWrite",
             "createOption": "FromImage"
           }
@@ -97,7 +97,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), copyindex()) )]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), '-', copyindex()) )]"
             }
           ]
         }
@@ -105,11 +105,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(variables('vmName'), copyindex(), '/install_zookeeper')]",
+      "name": "[concat(variables('vmName'), '-', copyindex(), '/install_zookeeper')]",
       "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyindex())]"
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), '-', copyindex())]"
       ],
       "copy": {
         "name": "scriptCopyLoop",

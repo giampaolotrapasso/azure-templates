@@ -163,7 +163,7 @@
       "imageReference": {
         "publisher": "Canonical",
         "offer": "UbuntuServer",
-        "sku": "14.04.5-LTS",
+        "sku": "18.04-LTS",
         "version": "latest"
       }
     },
@@ -246,7 +246,7 @@
           "commonSettings": {
             "value": {
               "adminUsername": "[parameters('adminUsername')]",
-              "namespace": "zk"
+              "namespace": "zookeeper"
             }
           },
           "storageSettings": {
@@ -290,7 +290,7 @@
           "commonSettings": {
             "value": {
               "adminUsername": "[parameters('adminUsername')]",
-              "namespace": "kf"
+              "namespace": "kafka"
             }
           },
           "storageSettings": {

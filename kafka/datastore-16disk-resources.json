@@ -44,7 +44,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('nicName'), copyindex())]",
+      "name": "[concat(variables('nicName'), '-', copyindex())]",
       "location": "[parameters('location')]",
       "copy": {
         "name": "nicCopyLoop",
@@ -56,7 +56,7 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[concat(variables('addprefix'), copyindex())]",
+              "privateIPAddress": "[concat(variables('addprefix'), '-', copyindex())]",
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
@@ -68,10 +68,10 @@
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(variables('vmName'), copyindex())]",
+      "name": "[concat(variables('vmName'), '-', copyindex())]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), copyindex())]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '-', copyindex())]"
       ],
       "copy": {
         "name": "vmCopyLoop",
@@ -85,125 +85,125 @@
           "vmSize": "[parameters('machineSettingsbroker').vmSize]"
         },
         "osProfile": {
-          "computerName": "[concat(variables('vmName'), copyindex())]",
+          "computerName": "[concat(variables('vmName'), '-', copyindex())]",
           "adminUsername": "[variables('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": "[parameters('osSettings').imageReference]",
           "osDisk": {
-            "name": "[concat(variables('vmName'), copyindex(),'_OSDisk')]", 
+            "name": "[concat(variables('vmName'), '-', copyindex(),'_OSDisk')]", 
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk1')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk1')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 0,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk2')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk2')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 1,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk3')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk3')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 2,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk4')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk4')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 3,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk5')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk5')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 4,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk6')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk6')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 5,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk7')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk7')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 6,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name":"[concat(variables('vmName'), copyindex(),'_DataDisk8')]", 
+              "name":"[concat(variables('vmName'), '-', copyindex(),'_DataDisk8')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 7,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk9')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk9')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 8,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk10')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk10')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 9,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk11')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk11')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 10,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name":"[concat(variables('vmName'), copyindex(),'_DataDisk12')]", 
+              "name":"[concat(variables('vmName'), '-', copyindex(),'_DataDisk12')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 11,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk13')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk13')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 12,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk14')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk14')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 13,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk15')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk15')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 14,
               "caching": "None",
               "createOption": "Empty"
             },
             {
-              "name": "[concat(variables('vmName'), copyindex(),'_DataDisk16')]", 
+              "name": "[concat(variables('vmName'), '-', copyindex(),'_DataDisk16')]", 
               "diskSizeGB": "[parameters('machineSettingsbroker').diskSize]",
               "lun": 15,
               "caching": "None",
@@ -214,7 +214,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), copyindex()) )]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), '-', copyindex()) )]"
             }
           ]
         }
@@ -222,11 +222,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(variables('vmName'), copyindex(), '/install_kafka')]",
+      "name": "[concat(variables('vmName'), '-', copyindex(), '/install_kafka')]",
       "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyindex())]"
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), '-', copyindex())]"
       ],
       "copy": {
         "name": "scriptCopyLoop",
@@ -239,7 +239,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": "[parameters('osSettings').scripts]",
-          "commandToExecute": "[concat('bash kafka-cluster-install.sh -b ',copyindex(),' -c ', variables('zCount'),' -i ', variables('zSubnet'))]"
+          "commandToExecute": "[concat('bash kafka-cluster-install.sh -b ', '-', copyindex(),' -c ', variables('zCount'),' -i ', variables('zSubnet'))]"
         }
       }
     }
