@@ -128,7 +128,7 @@ install_java()
     apt-get -y update 
     echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
     echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-    apt-get -y install oracle-java7-installer
+    apt-get -y install oracle-java8-installer
 }
 
 # Expand a list of successive IP range defined by a starting address prefix (e.g. 10.0.0.1) and the number of machines in the range

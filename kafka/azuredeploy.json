@@ -246,7 +246,7 @@
           "commonSettings": {
             "value": {
               "adminUsername": "[parameters('adminUsername')]",
-              "namespace": "zk"
+              "namespace": "zookeeper"
             }
           },
           "storageSettings": {
@@ -290,7 +290,7 @@
           "commonSettings": {
             "value": {
               "adminUsername": "[parameters('adminUsername')]",
-              "namespace": "kf"
+              "namespace": "kafka"
             }
           },
           "storageSettings": {
